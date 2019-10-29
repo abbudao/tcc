@@ -1,2 +1,121 @@
+Este capítulo tem como propósito fornecer o embasamento teórico necessário 
+para o entendimento da construção do sistema proposta. Aqui é contido uma
+descrição detalhada das técnicas, métodos e tecnologias utilizadas, assim  
+preparando o leitor para o conteúdo dos próximos capítulos.
 
 
+\section{Design de APIs}
+Separação de conceitos, traduzido do termo \emph{Separation of Concerns}, é uma temática 
+chave na arquitetura cliente-servidor da internet. Parte do porquê a internet funciona tão bem
+foi a preocupação, desde sua concepção, de uma interface uniforme que, desde que respeitada, 
+ daria liberdade aos desenvolvedores de implementar, em qualquer linguagem ou tecnologia,
+ um de seus componentes. 
+
+Apesar do sucesso na separação de conceitos entre as responsabilidades que o navegador 
+e o servidor empregam, a mesma preocupação não foi replicada entre interfaces e 
+funcionalidades que o servidor expõe. 
+Com frequência existe um alto acoplamento entre a interface, \emph{Frontend},
+e o servidor, \emph{Backend}, o que resulta em uma interface não uniforme para interação 
+dos recursos que deveriam estar expostos. Define-se aqui um recurso como qualquer conceito 
+na internet que pode ser referenciado por um identificador único e manipulado por uma interface uniforme 
+\ \cite{masse2011rest}.
+
+A solução, que leva ao desacoplamento, é a interação com estas
+funcionalidades través de uma \emph{API}, \emph{Application Programming Interface},
+exposta pelo \emph{backend}, que provê formas padronizadas 
+de acesso. Aqui não somente ganhamos portabilidade, já que possibilitamos que não só 
+um tipo de cliente, navegadores, saibam como acessar nossos recursos, mas ganhamos espaço 
+para criar uma camada de abstração do serviço \emph{Web}, modelando-o em recursos.
+Estes recursos não serão projetados como uma cópia da organização de dados ou funcionalidades 
+presentes no \emph{backend} mas em representações que sejam de fácil consumo e de entendimento 
+ubíquo pelo lado do cliente.
+
+O desafio de criar bons serviços na internet pode ser facilitado se empregarmos estilos 
+arquiteturais já existentes. Aqui definimos estilos arquiteturais como 
+um conjunto coordenado de restrições arquiteturais. \\
+Um destes estilos arquiteturas que tem ganhado cada vez 
+mais tração se chama \emph{REST}, \emph{Representational State Transfer}, ou em português,
+\emph{Transferência Representacional de Estado}. Cunhado por \citeonline{fielding2000architectural}, 
+o termo evoca como uma sistema na \emph{Web} deveria se comportar, uma máquina de estados 
+virtuais em que o usuário progride através da seleção de identificadores únicos, que identificam 
+recursos, e verbos \emph{HTTP}
+que operam sobre estes recursos.
+
+As restrições na arquitetura impostas pelo estilo \emph{REST} são agrupadas em seis categorias:
+\begin{description}
+\item[Cliente-servidor:] A separação dos papéis do cliente e servidor deve ser clara para 
+  que estes possam ser projetados e implementados de forma independente. A interação 
+  entre eles só acontece na forma de requisições, que são iniciadas pelo cliente. 
+  Servidores devem mandar respostas apenas como reações de requisições dos clientes.
+\item[Interface uniforme:] interfaces \emph{REST} possuem quatro  restrições:
+identificação de recursos, manipulação de recursos através de representações, 
+mensagens auto-descritivas e hipermídia como motor de estado da aplicação, \emph{HATEOAS}.\\
+A primeira dita que cada recurso precisa ser enderessável 
+por um identificador único, \emph{URI}, \emph{Unique Resource Identifier}.\\
+Este 
+recurso pode ser representado de diversas formas, seja um \emph{HTML}, que é mais adequado para 
+um navegador,
+ou \emph{JSON} que é mais apropriado para consumo de outro programa. Percebe-se aqui 
+que a representação é apenas uma forma de interagir com o 
+recurso,  não o próprio recurso. Isto é o que dita a segunda regra. \\
+No consumo de um \emph{API}, o cliente especifica um recurso e seu estado 
+desejado, enquanto o servidor deve responder com o recurso e seu estado real. 
+Esta troca de mensagens  deve ser feita utilizando \emph{headers} e 
+códigos de estado \emph{HTTP} que descrevam o estado 
+do recurso e metadados correspondentes, de forma que as mensagens sejam auto-descritivas.\\
+A última restrição, \emph{HATEOAS}, ajuda a aumentar a visibilidade e descoberta de recursos 
+relacionados na \emph{API}, que ajudam o cliente a navegar dinamicamente nos recursos expostos.
+Assim, quando referenciam-se outros recursos, também são fornecidos seus identificadores únicos 
+e verbos aceitos para aquela rota.
+\item[Sistema em camadas:] Restringe-se o comportamento dos componentes em camadas, em que 
+  cada camada só pode interagir com subjacentes. 
+  Entre as chamadas do cliente que requisita uma representação de um estado de um recurso, e 
+  o servidor que processa a requisição, podem haver vários servidores entre eles. Estes 
+  servidores podem prover um camada de segurança, \emph{cache}, balanceamento de carga ou 
+  outras funcionalidades. Estas camadas não devem afetar a requisição ou resposta e nem o cliente 
+  nem servidor precisam estar cientes se elas existem ou não.
+\item[Protocolo sem estado:] O servidor não deve lembrar absolutamente nada do usuário que 
+  utiliza sua \emph{API}. Isto implica que toda requisição individual precisa conter toda 
+  informação necessária para que o servidor processe e retorne uma resposta. Esta restrição 
+  visa aumentar a escalablidade, visibilidade e confiabilidade do sistema. Escalabilidade pois 
+  permite que haja \emph{caching} de respostas e que o servidor possa desalocar recursos 
+  físicos entre requisições, visibilidade pois sistemas que monitoram requisições não 
+  precisam olhar além de uma requisição, pois elas contém todo o dado necessário 
+  para entender a natureza desta, e a confibilidade pois a recuperação de falhas 
+  parciais se torna mais simples \ \cite{kendall1994note}.
+\item[Cache:] O servidor deve declarar quais dados podem ser guardados em \emph{caches}. 
+  \emph{Caches} ajudam a reduzir a latência percebida pelo cliente, aumentam a disponibilidade 
+  e confiabilidade de serviços e mitigam a carga de trabalho do servidor. Em resumo, 
+  \emph{caches} reduzem todos os custos associados a um serviço na \emph{internet}.
+\item[Código sob demanda:] A internet faz bastante uso de código sob demanda, que possibilita 
+  que o servidor transfira executáveis, tais como \emph{scripts} e \emph{plugins}, para a 
+  execução do lado do cliente. Apesar de proposto por \citeonline{fielding2000architectural}, 
+  esta restrição tende a estabelecer um acoplamento de tecnologias entre servidor e cliente. 
+  Por este motivo ``código sob demanda'' é a única restrição imposta pelo estilo arquitetural 
+  \emph{REST} que é considerada opcional.
+\end{description}
+
+O maior desafio no projeto de uma \emph{API} é abstrair componentes do sistema
+em recursos. O modelamento destes recursos estabelece os aspectos chaves da sua \emph{API}
+e é semelhante ao processo de modelar um banco de dados relacional ou mesmo o modelamento 
+clássico de um sistema orientado a objetos.
+
+No processo de modelagem de recursos, rotineiramente começa-se pensando em arquétipos de 
+recursos. Estes arquétipos nos ajudam a  comunicar de forma consistente 
+as estruturas que são frequentemente encontradas em \emph{Designs} de \emph{REST APIs}.
+Idealmente, cada recurso pertencerá a apenas um dos seguintes arquétipos: \emph{document}, 
+\emph{collection}, \emph{controller} e \emph{store}.
+
+\emph{Document} é o arquétipo base de todos os outros, todos os outros arquétipos são especializações 
+destes. Sua representação tipicamente incluí campos com dados ou \emph{hiperlinks} para outros 
+recursos. \emph{Collection} é um diretório de outros recursos em que clientes podem recuperar 
+ou, possivelmente, adicionar novos items a coleção. Já \emph{Stores} são recursos que permitem 
+que usuários guardem novos recursos, de forma que o próprio cliente escolha o 
+identificador daquele recurso. Para recursos que se parecem mais como procedimentos que 
+não se encaixam nos métodos padrões, \emph{CRUD} (\emph{create, retrieve, update, delete}),
+  o arquétipo \emph{Controller} é adequado. Todos estes arquétipos 
+  contém recomendações de como o identificador único deve ser escolhido, para que seja 
+  claro a quem consome a API de qual arquétipo se trata aquele recurso.
+  
+
+\section{Integração e entrega contínua}
