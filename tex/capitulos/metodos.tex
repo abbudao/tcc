@@ -116,6 +116,47 @@ não se encaixam nos métodos padrões, \emph{CRUD} (\emph{create, retrieve, upd
   o arquétipo \emph{Controller} é adequado. Todos estes arquétipos 
   contém recomendações de como o identificador único deve ser escolhido, para que seja 
   claro a quem consome a API de qual arquétipo se trata aquele recurso.
+
+  \section{O padrão \emph{OAuth}}
+
+  % -> O que é login federado? 
+  % -> Problemas que se resolvem com login federado 
+  % -> O padrão \emph{OAuth}
   
 
-\section{Integração e entrega contínua}
+  \section{Integração e entrega contínua}
+  Um dos grandes desafios no desenvolvimento de \emph{software} é criar um processo repetível e 
+  confiável para entregas de aplicações. Frequentemente, lançamentos de \emph{software} são
+  tratados por seus desenvolvedores como momentos estressantes. Associa-se este \emph{stress} a
+  muitos processos manuais, infrequentes e propensos a erros, conduzidos em curtos prazos 
+  de tempo.
+  
+  Pode-se, no entanto, se um processo rigoroso for seguido,  
+  tornar esta tarefa fácil, tão fácil quanto o apertar de um botão.
+  Para atingirmos este nível de maturidade no desenvolvimento de 
+  \emph{software}, \citeonline{humble2010continuous} propõe que
+  devemos seguir a risca dois princípios: automatização de todas etapas que sejam 
+  automatizáveis e manter todos os artefatos necessários para um lançamento em um sistema de 
+  controle de versões. 
+
+  Idealmente, uma entrega de \emph{software} é composta por três coisas: 
+  provisionar e gerenciar um ambiente que a aplicação irá rodar (configuração de \emph{hardware},
+  \emph{software}, infraestrutura e serviços externos), instalar a versão correta da aplicação 
+  neste ambiente e configurar a aplicação, incluindo qualquer estado ou dado que ela possa requerer.
+
+  De fato, até recentemente, vários destes passos para a entrega de \emph{software} pareciam 
+  impossíveis ou ao menos complexas de aderirem os princípios citados por 
+  \citeonline{humble2010continuous}. Como poderíamos, por exemplo, 
+  versionar \emph{hardware}? Com o advento de virtualização eficiente e barata, até esta 
+  tarefa que, \emph{a priori}, parecia impossível, virou algo corriqueiro e ubíquo. 
+  Com advento e adoção da computação em nuvem, todos os passos necessários para automatização 
+  de testes, compilação ou de artefatos e lançamento do \emph{software} estão 
+  acessíveis a qualquer desenvolvedor.
+
+  Define-se integração contínua como o processo no desenvolvimento de \emph{software} em que 
+  membros de um time integram seu trabalho de forma frequente. Cada integração desencadeia etapas 
+  como verificação de estilo de código, testes automatizados e construções de compilados ou 
+  outros artefatos, com o objetivo de encontrar problemas nas integrações o mais rápido possível.
+  Já entrega contínua leva a prática de integração contínua para outro patamar e automatiza 
+  o lançamento de versões do \emph{software} dado que as etapas anteriores foram concluídas com 
+  sucesso e o código foi revisado \cite{fowler2006continuous}.
