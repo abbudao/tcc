@@ -4,7 +4,7 @@ descrição detalhada das técnicas, métodos e tecnologias utilizadas, assim
 preparando o leitor para o conteúdo dos próximos capítulos.
 
 
-\section{Design de APIs}
+\section{Design de \emph{API}s}
 Separação de conceitos, traduzido do termo \emph{Separation of Concerns}, é uma temática 
 chave na arquitetura cliente-servidor da internet. Parte do porquê a internet funciona tão bem
 foi a preocupação, desde sua concepção, de uma interface uniforme que, desde que respeitada, 
@@ -101,21 +101,21 @@ e é semelhante ao processo de modelar um banco de dados relacional ou mesmo o m
 clássico de um sistema orientado a objetos.
 
 No processo de modelagem de recursos, rotineiramente começa-se pensando em arquétipos de 
-recursos. Estes arquétipos nos ajudam a  comunicar de forma consistente 
+recursos. Estes arquétipos nos ajudam a comunicar de forma consistente 
 as estruturas que são frequentemente encontradas em \emph{Designs} de \emph{REST APIs}.
-Idealmente, cada recurso pertencerá a apenas um dos seguintes arquétipos: \emph{document}, 
+Idealmente, cada recurso pertence a apenas um dos seguintes arquétipos: \emph{document}, 
 \emph{collection}, \emph{controller} e \emph{store}.
 
 \emph{Document} é o arquétipo base de todos os outros, todos os outros arquétipos são especializações 
 deste. Sua representação tipicamente inclui campos com dados ou \emph{hiperlinks} para outros 
 recursos. \emph{Collection} é um diretório de outros recursos em que clientes podem recuperar 
-ou, possivelmente, adicionar novos items à coleção. Já \emph{Stores} são recursos que permitem 
+ou, possivelmente, adicionar novos itens à coleção. Já \emph{Stores} são recursos que permitem 
 que usuários guardem novos recursos, de forma que o próprio cliente escolha o 
 identificador daquele recurso. Para recursos que se parecem mais como procedimentos que 
 não se encaixam nos métodos padrões \emph{CRUD} (\emph{create, retrieve, update, delete}),
   o arquétipo \emph{Controller} é adequado. Todos estes arquétipos 
   contêm recomendações de como o identificador único deve ser escolhido, para que seja 
-  claro a quem consome a API de qual arquétipo se trata aquele recurso.
+  claro a quem consome a \emph{API} de qual arquétipo se trata aquele recurso.
 
   \section{O padrão \emph{OAuth}}
   Apesar de vivermos em um mundo que depende, cada vez mais, de serviços digitais,
