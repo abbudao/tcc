@@ -50,15 +50,15 @@ As restrições na arquitetura impostas pelo estilo \emph{REST} são agrupadas e
 \item[Interface uniforme:] interfaces \emph{REST} possuem quatro  restrições:
 identificação de recursos, manipulação de recursos através de representações, 
 mensagens auto-descritivas e hipermídia como motor de estado da aplicação, \emph{HATEOAS}.\\
-A primeira dita que cada recurso precisa ser enderessável 
+A primeira dita que cada recurso precisa ser endereçável 
 por um identificador único, \emph{URI}, \emph{Unique Resource Identifier}.\\
 Este 
-recurso pode ser representado de diversas formas, seja um \emph{HTML}, que é mais adequado para 
+recurso pode ser representado de diversas formas, seja em formato \emph{HTML}, que é mais adequado para 
 um navegador,
-ou \emph{JSON} que é mais apropriado para consumo de outro programa. Percebe-se aqui 
+ou formato \emph{JSON}, que é mais apropriado para consumo de outro programa. Percebe-se aqui 
 que a representação é apenas uma forma de interagir com o 
 recurso,  não o próprio recurso. Isto é o que dita a segunda regra. \\
-No consumo de um \emph{API}, o cliente especifica um recurso e seu estado 
+No consumo de uma \emph{API}, o cliente especifica um recurso e seu estado 
 desejado, enquanto o servidor deve responder com o recurso e seu estado real. 
 Esta troca de mensagens  deve ser feita utilizando \emph{headers} e 
 códigos de estado \emph{HTTP} que descrevam o estado 
@@ -70,7 +70,7 @@ e verbos aceitos para aquela rota.
 \item[Sistema em camadas:] Restringe-se o comportamento dos componentes em camadas, em que 
   cada camada só pode interagir com subjacentes. 
   Entre as chamadas do cliente que requisita uma representação de um estado de um recurso, e 
-  o servidor que processa a requisição, podem haver vários servidores entre eles. Estes 
+  o servidor que processa a requisição, pode haver vários servidores entre eles. Estes 
   servidores podem prover um camada de segurança, \emph{cache}, balanceamento de carga ou 
   outras funcionalidades. Estas camadas não devem afetar a requisição ou resposta e nem o cliente 
   nem servidor precisam estar cientes se elas existem ou não.
@@ -80,7 +80,7 @@ e verbos aceitos para aquela rota.
   visa aumentar a escalablidade, visibilidade e confiabilidade do sistema. Escalabilidade pois 
   permite que haja \emph{caching} de respostas e que o servidor possa desalocar recursos 
   físicos entre requisições, visibilidade pois sistemas que monitoram requisições não 
-  precisam olhar além de uma requisição, pois elas contém todo o dado necessário 
+  precisam olhar além de uma requisição, pois elas contêm todo o dado necessário 
   para entender a natureza desta, e a confibilidade pois a recuperação de falhas 
   parciais se torna mais simples \ \cite{kendall1994note}.
 \item[Cache:] O servidor deve declarar quais dados podem ser guardados em \emph{caches}. 
@@ -107,36 +107,36 @@ Idealmente, cada recurso pertencerá a apenas um dos seguintes arquétipos: \emp
 \emph{collection}, \emph{controller} e \emph{store}.
 
 \emph{Document} é o arquétipo base de todos os outros, todos os outros arquétipos são especializações 
-destes. Sua representação tipicamente incluí campos com dados ou \emph{hiperlinks} para outros 
+deste. Sua representação tipicamente inclui campos com dados ou \emph{hiperlinks} para outros 
 recursos. \emph{Collection} é um diretório de outros recursos em que clientes podem recuperar 
-ou, possivelmente, adicionar novos items a coleção. Já \emph{Stores} são recursos que permitem 
+ou, possivelmente, adicionar novos items à coleção. Já \emph{Stores} são recursos que permitem 
 que usuários guardem novos recursos, de forma que o próprio cliente escolha o 
 identificador daquele recurso. Para recursos que se parecem mais como procedimentos que 
-não se encaixam nos métodos padrões, \emph{CRUD} (\emph{create, retrieve, update, delete}),
+não se encaixam nos métodos padrões \emph{CRUD} (\emph{create, retrieve, update, delete}),
   o arquétipo \emph{Controller} é adequado. Todos estes arquétipos 
-  contém recomendações de como o identificador único deve ser escolhido, para que seja 
+  contêm recomendações de como o identificador único deve ser escolhido, para que seja 
   claro a quem consome a API de qual arquétipo se trata aquele recurso.
 
   \section{O padrão \emph{OAuth}}
   Apesar de vivermos em um mundo que depende, cada vez mais, de serviços digitais,
   a maior parcela dos usuários ainda não se educaram ou 
   não seguem boas práticas de segurança na \emph{internet}. Não é infrequente que se 
-  use as mesmas credenciais em múltiplos serviços, mesmo que o usuário 
+  usem as mesmas credenciais em múltiplos serviços, mesmo que o usuário 
   não tenha meios de averiguar que suas informações são manuseadas e armazenadas de forma 
   adequada.
 
-  Uma das possíveis soluções para uma melhor gestão de identididade na \emph{internet}, 
+  Uma das possíveis soluções para uma melhor gestão de identidade na \emph{internet} 
   é o uso de identidades federadas \cite{208723}. Uma identidade federada é um meio 
   de uma pessoa vincular sua identidade eletrônica e atributos pessoais 
-  a múltiplas partes distintas. Esta solução trás benefícios como mais garantias
+  a múltiplas partes distintas. Esta solução traz benefícios como mais garantias
   de segurança no armazenamento de credencias, menos sobrecarga de responsabilidade 
-  para desenvolvedores de aplicações e uma melhor experiência para o usúario, já que se 
-  diminuí o atrito na criação e gerenciamento de múltiplas contas.
+  para desenvolvedores de aplicações e uma melhor experiência para o usuário, já que se 
+  diminui o atrito na criação e gerenciamento de múltiplas contas.
 
   O modelo de serviço federado pode ser dividido em duas componentes necessárias: 
   o provedor de identidade e o provedor de serviço. Ambas as partes cumprem papéis 
   distintos e sem qualquer uma delas não temos uma solução de identidade federada. 
-  Para que a solução funcione, deve se haver um relacionamento de confiança entre 
+  Para que a solução funcione, deve haver um relacionamento de confiança entre 
   o provedor de identidade e o provedor de serviço. Caso o provedor de identidade 
   não confie no provedor de serviço, este não o confiará os dados de usuários.
   Caso o provedor de serviço não confie no provedor de identidade, 
@@ -150,7 +150,7 @@ não se encaixam nos métodos padrões, \emph{CRUD} (\emph{create, retrieve, upd
   do modelo de computação em nuvem, cada vez mais usuários entram em contato com algum dos três 
   principais modelos de serviço em nuvem,  \emph{Infrastructure as a Service} (\emph{IaaS}), 
   \emph{Platform as a Service} \emph{PaaS} e \emph{SaaS}, \emph{Software as a Service}, 
-  todas as quais depende de um modelo de serviço federado \cite{rountree2012federated}.
+  todas as quais dependem de um modelo de serviço federado \cite{rountree2012federated}.
 
   Existem vários padrões que implementam o modelo de serviço federado, as mais famosas sendo:
   \emph{SAML} (Security Assertion Markup Language), \emph{OAuth}, \emph{OpenID}, 
@@ -168,7 +168,7 @@ não se encaixam nos métodos padrões, \emph{CRUD} (\emph{create, retrieve, upd
 
   \emph{OAuth 2.0} suporta vários fluxos de autenticação: fluxo usuário-agente, 
   fluxo servidor \emph{Web}, fluxo de dispositivo, fluxo de usuário e senha, fluxo 
-  de credencias de cliente e fluxo de asserção. A maioria das aplicações \emph{Web}, 
+  de credenciais de cliente e fluxo de asserção. A maioria das aplicações \emph{Web}, 
   principalmente quando se tratam de \emph{Single Page Applications},
   fazem uso do fluxo servidor \emph{Web}, também 
   conhecido por ``concessão de código de acesso" (\emph{Authorization Code Grant})
@@ -185,8 +185,8 @@ não se encaixam nos métodos padrões, \emph{CRUD} (\emph{create, retrieve, upd
 
   Existem alguns detalhes que garantem a segurança do fluxo anterior. Quando a aplicação requisita 
   o servidor de autorização por um código de autorização, ela informa um identificador de cliente, que 
-  indica sua identididade, uma \emph{url} de retorno, que é para aonde o servidor de autorização mandará 
-  o código de acesso e uma cadeia de caracteres aleátorios que será usado para validar se a requisição 
+  indica sua identididade, uma \emph{url} de retorno, que é para onde o servidor de autorização mandará 
+  o código de acesso e uma cadeia de caracteres aleatórios que será usado para validar se a requisição 
   veio do servidor de autorização. Caso na requisição a \emph{url} de retorno informada seja diferente 
   da cadastrada pela aplicação no servidor de autorização previamente, a requisição é abortada. No 
   recebimento da resposta do servidor de autenticação, caso a cadeia de caracteres aleátorios não seja a mesma 
@@ -212,13 +212,13 @@ não se encaixam nos métodos padrões, \emph{CRUD} (\emph{create, retrieve, upd
   Pode-se, no entanto, se um processo rigoroso for seguido,  
   tornar esta tarefa fácil, tão fácil quanto o apertar de um botão.
   Para atingirmos este nível de maturidade no desenvolvimento de 
-  \emph{software}, \citeonline{humble2010continuous} propõe que
-  devemos seguir a risca dois princípios: automatização de todas etapas que sejam 
+  \emph{software}, \citeonline{humble2010continuous} propõem que
+  devemos seguir à risca dois princípios: automatização de todas etapas que sejam 
   automatizáveis e manter todos os artefatos necessários para um lançamento em um sistema de 
   controle de versões. 
 
-  Idealmente, uma entrega de \emph{software} é composta por três coisas: 
-  provisionar e gerenciar um ambiente que a aplicação irá rodar (configuração de \emph{hardware},
+  Idealmente, uma entrega de \emph{software} é composta por três atividades: 
+  provisionar e gerenciar o ambiente em que a aplicação irá rodar (configuração de \emph{hardware},
   \emph{software}, infraestrutura e serviços externos), instalar a versão correta da aplicação 
   neste ambiente e configurar a aplicação, incluindo qualquer estado ou dado que ela possa requerer.
 
