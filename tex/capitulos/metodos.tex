@@ -118,10 +118,88 @@ não se encaixam nos métodos padrões, \emph{CRUD} (\emph{create, retrieve, upd
   claro a quem consome a API de qual arquétipo se trata aquele recurso.
 
   \section{O padrão \emph{OAuth}}
+  Apesar de vivermos em um mundo que depende, cada vez mais, de serviços digitais,
+  a maior parcela dos usuários ainda não se educaram ou 
+  não seguem boas práticas de segurança na \emph{internet}. Não é infrequente que se 
+  use as mesmas credenciais em múltiplos serviços, mesmo que o usuário 
+  não tenha meios de averiguar que suas informações são manuseadas e armazenadas de forma 
+  adequada.
 
-  % -> O que é login federado? 
-  % -> Problemas que se resolvem com login federado 
-  % -> O padrão \emph{OAuth}
+  Uma das possíveis soluções para uma melhor gestão de identididade na \emph{internet}, 
+  é o uso de identidades federadas \cite{208723}. Uma identidade federada é um meio 
+  de uma pessoa vincular sua identidade eletrônica e atributos pessoais 
+  a múltiplas partes distintas. Esta solução trás benefícios como mais garantias
+  de segurança no armazenamento de credencias, menos sobrecarga de responsabilidade 
+  para desenvolvedores de aplicações e uma melhor experiência para o usúario, já que se 
+  diminuí o atrito na criação e gerenciamento de múltiplas contas.
+
+  O modelo de serviço federado pode ser dividido em duas componentes necessárias: 
+  o provedor de identidade e o provedor de serviço. Ambas as partes cumprem papéis 
+  distintos e sem qualquer uma delas não temos uma solução de identidade federada. 
+  Para que a solução funcione, deve se haver um relacionamento de confiança entre 
+  o provedor de identidade e o provedor de serviço. Caso o provedor de identidade 
+  não confie no provedor de serviço, este não o confiará os dados de usuários.
+  Caso o provedor de serviço não confie no provedor de identidade, 
+  também não confiará nas informações advindas dele.
+
+  O provedor de identidade é quem mantém as informações de identidade. Usuários 
+  se autenticam diante ao banco de credenciais do provedor, que então libera as
+  informações relativas àquele usuário ao provedor de serviço que iniciou o processo 
+  de autenticação. O provedor de serviço é aquele que provê serviços a usuários, 
+  estes sendo aplicações, serviços de infraestrutura ou serviços de dados. Com a popularização 
+  do modelo de computação em nuvem, cada vez mais usuários entram em contato com algum dos três 
+  principais modelos de serviço em nuvem,  \emph{Infrastructure as a Service} (\emph{IaaS}), 
+  \emph{Platform as a Service} \emph{PaaS} e \emph{SaaS}, \emph{Software as a Service}, 
+  todas as quais depende de um modelo de serviço federado \cite{rountree2012federated}.
+
+  Existem vários padrões que implementam o modelo de serviço federado, as mais famosas sendo:
+  \emph{SAML} (Security Assertion Markup Language), \emph{OAuth}, \emph{OpenID}, 
+  \emph{Simple Web Tokens}, \emph{JSON Web Tokens} e \emph{Windows Identity Foundation}. O 
+  padrão que tem ganhado mais adeptos, pela sua abordagem simples porém robusta,
+  é o padrão \emph{OAuth}, que já conta com quatro revisões, sendo a última
+  \emph{OAuth 2.0}. 
+
+  \emph{OAuth 2.0} é um padrão aberto criado para suportar autorização de forma segura. 
+  Existem três papéis definidos pelo padrão: servidor de autorização, servidor de recurso e 
+  dono do recurso. Em modelos tradicionais cliente-servidor, o dono do recurso, ou seja, cliente 
+  acessaria recursos no servidor de recurso, desde que este consiga se autenticar com 
+  sucesso no servidor. No padrão \emph{OAuth} temos duas ou três partes envolvidas, 
+  sendo duas quando o servidor de autorização também é o dono do recurso.
+
+  \emph{OAuth 2.0} suporta vários fluxos de autenticação: fluxo usuário-agente, 
+  fluxo servidor \emph{Web}, fluxo de dispositivo, fluxo de usuário e senha, fluxo 
+  de credencias de cliente e fluxo de asserção. A maioria das aplicações \emph{Web}, 
+  principalmente quando se tratam de \emph{Single Page Applications},
+  fazem uso do fluxo servidor \emph{Web}, também 
+  conhecido por ``concessão de código de acesso" (\emph{Authorization Code Grant})
+  que é ilustrado pela \fref{fig:web_flow} e definido por \citeonline{hardt2012rfc}. 
+
+  O fluxo de concessão de código de acesso começa quando um usuário, dono de um recurso, escolhe 
+  fazer \emph{login} ou atrelar sua conta do servidor de autorização em uma aplicação. A aplicação 
+  faz uma requisição ao servidor de autorização que por sua vez retorna uma página de \emph{login}. 
+  O usuário preenche suas credencias na página e autoriza a aplicação a acessar um determinado 
+  escopo de recursos. Em seguida, o servidor de autorização emite um código de autorização, 
+  que geralmente expira em minutos. A aplicação, em posse do código de autorização, requisita 
+  ao servidor de autorização um código de acesso. Com o código de acesso, a aplicação agora 
+  pode acessar recursos protegidos do servidor de recursos, até que este código expire.
+
+  Existem alguns detalhes que garantem a segurança do fluxo anterior. Quando a aplicação requisita 
+  o servidor de autorização por um código de autorização, ela informa um identificador de cliente, que 
+  indica sua identididade, uma \emph{url} de retorno, que é para aonde o servidor de autorização mandará 
+  o código de acesso e uma cadeia de caracteres aleátorios que será usado para validar se a requisição 
+  veio do servidor de autorização. Caso na requisição a \emph{url} de retorno informada seja diferente 
+  da cadastrada pela aplicação no servidor de autorização previamente, a requisição é abortada. No 
+  recebimento da resposta do servidor de autenticação, caso a cadeia de caracteres aleátorios não seja a mesma 
+  da enviada, aborta-se o processo. Para obtenção do código de acesso, a aplicação também não somente deve informar 
+  ao servidor de autenticação o código de autorização, mas também um segredo previamente cadastrado em conjunto 
+  com seu identificador.
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/web_flow.png}
+    \caption{Diagrama que explica o funcionamento do fluxo servidor \emph{Web}, 
+      definido na seção 4.1 da norma \emph{RFC 6749}, retirado de \url{https://www.authlete.com}.}%
+    \label{fig:web_flow}
+  \end{figure}
   
 
   \section{Integração e entrega contínua}
