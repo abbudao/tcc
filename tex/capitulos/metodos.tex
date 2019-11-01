@@ -1,5 +1,6 @@
+\section{Considerações Iniciais}
 Este capítulo tem como propósito fornecer o embasamento teórico necessário 
-para o entendimento da construção do sistema proposta. Aqui é contido uma
+para o entendimento da construção do sistema proposto. Aqui é contido uma
 descrição detalhada das técnicas, métodos e tecnologias utilizadas, assim  
 preparando o leitor para o conteúdo dos próximos capítulos.
 
@@ -36,7 +37,7 @@ um conjunto coordenado de restrições arquiteturais. \\
 Um destes estilos arquiteturas que tem ganhado cada vez 
 mais tração se chama \emph{REST}, \emph{Representational State Transfer}, ou em português,
 \emph{Transferência Representacional de Estado}. Cunhado por \citeonline{fielding2000architectural}, 
-o termo evoca como uma sistema na \emph{Web} deveria se comportar, uma máquina de estados 
+o termo evoca como um sistema na \emph{Web} deveria se comportar, uma máquina de estados 
 virtuais em que o usuário progride através da seleção de identificadores únicos, que identificam 
 recursos, e verbos \emph{HTTP}
 que operam sobre estes recursos.
@@ -117,6 +118,53 @@ não se encaixam nos métodos padrões \emph{CRUD} (\emph{create, retrieve, upda
   contêm recomendações de como o identificador único deve ser escolhido, para que seja 
   claro a quem consome a \emph{API} de qual arquétipo se trata aquele recurso.
 
+  \section{\emph{Python} e \emph{Flask}}
+  Python é uma linguagem com sintaxe clara e concisa, favorecendo a legibilidade do 
+  código-fonte, o que a torna uma linguagem extremamente produtiva. A linguagem incluí 
+  diversas estruturas e módulos de alto nível e, por ser,
+  segundo \hyperref[link:exercism]{\emph{a pesquisa anual de desenvolvedores 
+      do site \emph{StackOverflow}}},
+  uma das linguagens mais populares e amadas do mundo, possuí uma infinidade 
+  de excelentes \emph{Frameworks} e bibliotecas de terceiros, que podem ser instalados 
+  de forma simples e gratuita. 
+
+  A linguagem incluí vários recursos de outras linguagens 
+  modernas, tais como geradores, instropecção, persistência, metaclasses e unidades de 
+  teste. Multiparadigma,
+  a linguagem é feita para suportar programação modular e funcional, 
+  tal como orientação a objetos.
+  A linguagem é interpretada através de 
+  \emph{bytecode}s pela máquina virtual do \emph{Python}, tornando seu código 
+  excepcionalmente portável, e, como conta com tipagem dinâmica, é muito adequada 
+  para prototipação \ \cite{borges2014python}. 
+
+  Sua sintaxe clara torna fácil seu aprendizado, mesmo por iniciantes. 
+  Além de ser largamente utilizada no desenvolvimento de sistemas, a linguagem é muito utilizada 
+  para automatização de tarefas, por meio de \emph{scripts}. Também se integra 
+  muito bem com outras linguagens, como \emph{C} ou \emph{Fortran}, fazendo-se 
+  uma ótima linguagem para a escrita de \emph{wrappers}. \emph{Python} é um 
+  \emph{software} de código aberto e é largamente utilizado na indústria, 
+  por grandes empresas como: \emph{Microsoft}, \emph{Yahoo}, \emph{Google}, \emph{Disney}, 
+  entre tantas outras.
+
+  \emph{Python} é largamente utilizado para a construção de aplicações \emph{Web}, normalmente 
+  desenvolvidos em algum tipo de \emph{framework}, sendo \emph{Django} a escolha mais comum.
+  \emph{Django} conta com todas as ferramentas necessárias para o desenvolvimento 
+  embutidas em seu \emph{framework}, como \emph{ORM}, \emph{Object Relation Mapper}, 
+  soluções para autenticação e autorização, e um sistema de administração. Ao oferecer
+  uma solução completa, perde-se em desempenho na aplicação e inflexibiliza-se seu 
+  desenvolvimento. Para aqueles 
+  que querem construir uma aplicação enxuta e de forma menos opinada, sugere-se um
+  \emph{microframework Web}. 
+
+  O mais popular \emph{microframework web} escrito em Python se chama \emph{Flask}.
+  Denomina-se ``\emph{micro}'' devido as poucas escolhas que foram feitas 
+  em sua implementação,
+  deixando a cargo do desenvolvedor a implementação dos módulos que se mostrem 
+  necessários. A abordagem minimalista possibilita o surgimento de um ecossitema de 
+  pacotes diverso, em que o desenvolvedor opta por pacotes que são mais adequados a 
+  necessidade do projeto, ao invés de seguir decisões tomadas pelo \emph{framework}.
+
   \section{O padrão \emph{OAuth}}
   Apesar de vivermos em um mundo que depende, cada vez mais, de serviços digitais,
   a maior parcela dos usuários ainda não se educaram ou 
@@ -153,34 +201,42 @@ não se encaixam nos métodos padrões \emph{CRUD} (\emph{create, retrieve, upda
   todas as quais dependem de um modelo de serviço federado \cite{rountree2012federated}.
 
   Existem vários padrões que implementam o modelo de serviço federado, as mais famosas sendo:
-  \emph{SAML} (Security Assertion Markup Language), \emph{OAuth}, \emph{OpenID}, 
-  \emph{Simple Web Tokens}, \emph{JSON Web Tokens} e \emph{Windows Identity Foundation}. O 
+  \emph{SAML} (Security Assertion Markup Language), \emph{OAuth}, \emph{OpenID} 
+  e \emph{Windows Identity Foundation}. O 
   padrão que tem ganhado mais adeptos, pela sua abordagem simples porém robusta,
   é o padrão \emph{OAuth}, que já conta com quatro revisões, sendo a última
   \emph{OAuth 2.0}. 
 
   \emph{OAuth 2.0} é um padrão aberto criado para suportar autorização de forma segura. 
-  Existem três papéis definidos pelo padrão: servidor de autorização, servidor de recurso e 
-  dono do recurso. Em modelos tradicionais cliente-servidor, o dono do recurso, ou seja, cliente 
-  acessaria recursos no servidor de recurso, desde que este consiga se autenticar com 
-  sucesso no servidor. No padrão \emph{OAuth} temos duas ou três partes envolvidas, 
-  sendo duas quando o servidor de autorização também é o dono do recurso.
+    Existem quatro papéis definidos pelo padrão: servidor de autorização, 
+  servidor de recurso, dono do recurso, comumente chamado de usuário, e o cliente, 
+  que no contexto do \emph{OAuth 2.0} é uma aplicação que quer ser autorizada a 
+  acessar um recurso do usuário. 
 
-  \emph{OAuth 2.0} suporta vários fluxos de autenticação: fluxo usuário-agente, 
-  fluxo servidor \emph{Web}, fluxo de dispositivo, fluxo de usuário e senha, fluxo 
-  de credenciais de cliente e fluxo de asserção. A maioria das aplicações \emph{Web}, 
-  principalmente quando se tratam de \emph{Single Page Applications},
-  fazem uso do fluxo servidor \emph{Web}, também 
-  conhecido por ``concessão de código de acesso" (\emph{Authorization Code Grant})
+  O padrão suporta vários fluxos de autorização dependendo das capacidades 
+  e grau de confiança que o servidor de autorização possui em um cliente.
+  Caso o cliente tenha a capacidade de armazenar um segredo em comum com o 
+  servidor de autorização, o fluxo de concessão do código de autorização \emph{(Authorization Code Grant)} 
+  pode ser utilizado. Se ele não possui essa capacidade, como no caso de aplicações 
+  que são executadas no computador do usuário, o fluxo implicito \emph{(Implicit Grant)} 
+  pode ser utilizado. Se o cliente pode ser confiado com as credenciais do usuário, 
+  comum em aplicações da mesma empresa, 
+  ele pode utilizar o fluxo de senha do dono do recurso \emph{(Resource Owner Password Grant)}.
+
+  Alem disso, o \emph{OAuth 2.0} permite que clientes obtenham permissão para acessar 
+  recursos que não são relacionados a nenhum usuário utilizando o fluxo de credenciais 
+  de cliente \emph{(Client Credentials Grant)}. 
+  A maioria das aplicações Web, por possuirem servidores capazes de manter 
+  um segredo em comum com o servidor de autorização, fazem o uso do fluxo de código de acesso,
   que é ilustrado pela \fref{fig:web_flow} e definido por \citeonline{hardt2012rfc}. 
 
   O fluxo de concessão de código de acesso começa quando um usuário, dono de um recurso, escolhe 
   fazer \emph{login} ou atrelar sua conta do servidor de autorização em uma aplicação. A aplicação 
-  faz uma requisição ao servidor de autorização que por sua vez retorna uma página de \emph{login}. 
-  O usuário preenche suas credencias na página e autoriza a aplicação a acessar um determinado 
+  encaminha o usuário ao servidor de autorização e o usuário preenche suas credencias  
+  e autoriza a aplicação a acessar um determinado 
   escopo de recursos. Em seguida, o servidor de autorização emite um código de autorização, 
   que geralmente expira em minutos. A aplicação, em posse do código de autorização, requisita 
-  ao servidor de autorização um código de acesso. Com o código de acesso, a aplicação agora 
+  diretamente ao servidor de autorização um código de acesso. Com o código de acesso, a aplicação agora 
   pode acessar recursos protegidos do servidor de recursos, até que este código expire.
 
   Existem alguns detalhes que garantem a segurança do fluxo anterior. Quando a aplicação requisita 
@@ -191,13 +247,14 @@ não se encaixam nos métodos padrões \emph{CRUD} (\emph{create, retrieve, upda
   da cadastrada pela aplicação no servidor de autorização previamente, a requisição é abortada. No 
   recebimento da resposta do servidor de autenticação, caso a cadeia de caracteres aleátorios não seja a mesma 
   da enviada, aborta-se o processo. Para obtenção do código de acesso, a aplicação também não somente deve informar 
-  ao servidor de autenticação o código de autorização, mas também um segredo previamente cadastrado em conjunto 
+  ao servidor de autenticação o código de autorização, mas também um segredo, \emph{client secret},
+  previamente cadastrado em conjunto 
   com seu identificador.
   \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.95\linewidth]{images/web_flow.png}
-    \caption{Diagrama que explica o funcionamento do fluxo servidor \emph{Web}, 
-      definido na seção 4.1 da norma \emph{RFC 6749}, retirado de \url{https://www.authlete.com}.}%
+    \caption{Diagrama que explica o funcionamento do fluxo de concessão do código de autorização, 
+      definido na seção 4.1 da norma \emph{RFC 6749}. Fonte: \hyperref[link:oauth]{\emph{API Gateway OAuth 2.0 Authentication Flows}}.}%
     \label{fig:web_flow}
   \end{figure}
   
