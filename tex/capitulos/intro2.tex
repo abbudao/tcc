@@ -7,49 +7,26 @@ vasta gama de défices e dificuldades, desde a compreensão de constructos
 básicos de uma linguagem de programação à elaboração de planos
 para resolver um dado problema \ \cite{robins2003learning}.
 
-Um grande número de estudos concluem, de forma semelhante, que alunos, 
+Estudos concluem, de forma semelhante, que alunos, 
 mesmo tendo aprendido a sintaxe e semântica de uma linguagem 
 de programação, tendem a falhar em compor os blocos fundamentais 
-estudados em programas  válidos. Parte deste problema é abordado por 
+estudados em programas válidos. Parte deste problema é abordada por 
 \citeonline{davies1993models}, que faz uma distinção de duas partes 
 essenciais no aprendizado em programação: 
 conhecimento e estratégia. Denota-se conhecimento em programação como a parte declarativa 
-do conhecimento, \emph{e.g.\ } saber que existe um constructo chamado \emph{for} na linguagem 
+do conhecimento, por exemplo, saber que existe um constructo chamado \emph{for} na linguagem 
 e seu propósito. Já estratégia em programação seria empregar de forma adequada o conhecimento 
-em face de um problema, como o uso pertinente de um \emph{for} em um programa.\\
+em face de um problema, como o uso pertinente de um \emph{for} em um programa.
 \citeonline{davies1993models} defende que grande parte das abordagens em ensino 
 tendem a investir excessivamente na parcela de conhecimento em programação, muitas 
 vezes deixando de lado o aspecto de estratégia.
 
-Além desta falta de ênfase no ensino de estratégia em programação,
-\citeonline{winslow1996programming} afirma que, ainda que o aluno saiba resolver 
-manualmente o problema,
-existe uma grande dificuldade na adaptação 
-desta solução para seu equivalente em um programa de computador. Este fato 
-corrobora com a teoria de \citeonline{brooks1983towards} em que se afirma que programação 
-é o processo de construir mapeamentos entre o domínio problema, possivelmente passando 
-por muitos domínios intermediários, para chegar finalmente no domínio da programação. 
-Por esta teoria, o entendimento de um programa nada mais é que a reconstrução de 
-ao menos uma parte destas relações entre domínios e que este processo é orientado 
-a criação, confirmação e refinamento de hipóteses.
-
-A complexidade da tarefa não só se concentra no ensino de conhecimento e 
-estratégia em programação, nem na elaboração de habilidades que relacionem o domínio 
-do problema ao domínio da programação, mas na flexibilidade que o iniciante deve 
-alcançar na resolução de problemas. Desta forma, o processo de escrita 
-de um programa deve  ser oportunística e incremental, em que o plano adotado 
-e problema sempre estão em 
-constante reavaliação, e que isto pode resultar em desvios e reformulações do plano
-original \ \cite{visser1990more}. \\
-Para que seja possível instrumentalizar esta escrita oportunística e incremental, 
-o aluno deve adquirir outras habilidades como \emph{debugging} de programas e 
-familiaridade com um ambiente de programação.
-
-Em vista ao imenso desafio que é o ensino de programação a iniciantes, diversas ferramentas 
-foram desenvolvidas para dar apoio pedagógico ao professor nesta tarefa. Uma razoável parcela 
-destas ferramentas são sistemas de juízes \emph{online}, que consistem em sistemas capazes 
+Em vista do imenso desafio que é o ensino de programação a iniciantes, diversas ferramentas 
+foram desenvolvidas para dar apoio pedagógico ao professor nesta tarefa.  
+Estas ferramentas, em grande parte, são sistemas de juízes \emph{online}, 
+que consistem em sistemas capazes 
 de receber códigos desenvolvidos pelos usuários como resposta a um determinado problema, mas 
-com a capacidade de dar um \emph{feedback} imediato ao usuário, informando 
+com a capacidade de dar \emph{feedback} imediato ao usuário, informando 
 se o código está correto ou não, através de análise sintática e testes automatizados.
 
 Já existe uma grande variedade em juízes \emph{online} disponíveis na literatura científica,
@@ -73,7 +50,35 @@ tais como:
 	\hyperref[link:exercism]{\emph{Exercism}}, 
 	entre tantos outros.
 
-Apesar da grande variedade e maturidade destas plataformas existentes, poucas 
+Boa parte dessas ferramentas consiste em serviço gratuito oferecido ao aprendiz,
+e com poucos recursos de acompanhamento por parte dos professores.
+Outra parte, sim, é direcionada para situações acadêmicas, mas com 
+\emph{workflows} de submissão e correção de programas rígidos;
+qualquer intenção de personalizar uma típica ferramenta desse gênero
+implica alterar o código-fonte.
+
+O sistema que é tema do presente trabalho, o \emph{Sharpener}, surgiu do
+anseio de se fazer pequenas adaptações a ferramentas de apoio a disciplinas
+de programação.
+Um problema observado é que alguns alunos não sabem como dar um próximo passo
+na resolução de um exercício;
+muitas vezes, eles precisam de um empurrão (como uma dica) para prosseguir.
+Em aulas com muitos alunos, o professor nem sempre é capaz de proporcionar
+esse tipo de acompanhamento e atenção, devidos às limitações evidentes.
+A questão passa a ser, então, se uma ferramenta poderia prover ao aluno
+algum tipo de apoio, de forma que o aluno, seguindo a ferramenta, pudesse
+explorar possibilidades e alternativas que o impulsionassem na continuação
+do exercício; o aluno teria, com isso, uma relativa autonomia no aprendizado.
+
+A solução mais imediata é capacitar a ferramenta e entregar dicas conforme
+o aluno as solicita. Para isso, o professor precisaria ter alimentado o sistema
+com dicas no mesmo momento em que teria carregado o enunciado do exercício.
+Uma ideia similar é entregar ao aluno, de uma vez, a resposta completa do problema.
+Muitos alunos têm uma ansiedade por ver respostas. 
+Um aluno que passou
+
+
+poucas 
 têm como foco ser uma ferramenta de auxílio didático ao professor em sala de aula e 
 praticamente nenhuma é de código aberto. Assim sendo, existe uma lacuna que pode
 ser preenchida por um sistema que tenha estes dois focos e dê liberdade ao professor 
@@ -92,8 +97,3 @@ empregadas na implementação
 da prova de conceito do sistema \emph{Sharpener}. A seguir, no Capítulo 3, descreve-se a especificação 
 funcional do sistema tais como seus detalhes de implementação. Finalmente no Capítulo 4 apresentam-se 
 os resultados e possíveis trabalhos futuros.
-%\aspas
-%\sigla
-% Comando simples para exibir comandos Latex no texto
-% \cite{frasson:2005:classe_abnt}.
-

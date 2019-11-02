@@ -1,9 +1,7 @@
 \section{Considerações Iniciais}
-Este capítulo apresentará o projeto como um todo, explicando escolhas que foram 
+Este capítulo apresenta o projeto como um todo, explicando escolhas que foram 
 feitas em seu desenvolvimento, tais como ferramentas e tecnologias adotadas. 
-Como muitas tecnologias diferentes são citadas, supõe-se 
-aqui que os conceitos e técnicas descritas no capítulo anterior já pareçam 
-mais familiares ao leitor.
+ 
 
 
 \section{Projeto}
@@ -15,36 +13,36 @@ tanto quanto agradável para alunos participarem de atividades, desenvolveu-se n
  que, de forma coletiva, construa-se uma plataforma de excelência,
  por meio de colaborações em código aberto.
 
-O professor na plataforma será capaz de criar e gerenciar exercícios, trilhas e turmas. 
+O professor na plataforma é capaz de criar e gerenciar exercícios, trilhas e turmas. 
 Alunos se inscrevem na plataforma por meio de um \emph{login} de identidade federada, e 
-ingressarão nas turmas por meio de um \emph{link} específico, que será fornecido 
+ingressam nas turmas por meio de um \emph{link} específico, que é fornecido 
 pelo professor nos primeiros dias de aula. 
 
-Trilhas de exercícios são preparadas por professores, que a associarão as suas turmas. 
-Estas trilhas são compostas de alguns \emph{clusters} de exercícios, que 
+Trilhas de exercícios são preparadas por professores, que a associam às suas turmas. 
+Estas trilhas são compostas de Grupos de Exercícios Equivalentes que 
 contêm exercícios de assuntos correlatos e, idealmente, de mesmo nível de dificuldade.
-Para cada aluno, será sorteado um exercício de cada \emph{cluster} de forma aleatória. 
+Para cada aluno, é sorteado um exercício de cada grupo de forma aleatória. 
 Caso o aluno apresente dificuldade na resolução deste exercício, o aluno pode solicitar 
-dicas relativas ao exercício, ou, em último caso, a resolução do mesmo. Caso a solução 
-seja requisitada, outro exercício do mesmo \emph{cluster} é sorteado a este aluno.
+dicas relativas ao exercício, ou, em último caso, a solução do mesmo. Caso a solução 
+seja requisitada, outro exercício do mesmo passo é sorteado a este aluno.
 
 Para diminuir o escopo inicial do projeto e incentivar o estudante a se familiarizar com o ferramental 
-que envolve desenvolvimento de \emph{software}, escolheu-se que o desenvolvimento do código 
+que envolve desenvolvimento de software, escolheu-se que o desenvolvimento do código 
 acontecesse localmente no computador do aluno. Para que, ainda sim, proporcionemos ao aluno 
 uma boa experiência, desenvolveu-se uma interface por linha de comando, que nos referiremos a partir de agora 
 por \emph{CLI} (\emph{Command Line Interface}). Por meio desta \emph{CLI},
-o aluno poderá fazer \emph{downloads} e submissões
+o aluno pode fazer \emph{downloads} e submissões
 dos exercícios propostos de maneira rápida e prática.
 
-Dessa forma particionou-se o sistema em três grandes partes: uma interface gráfica, \emph{Frontend}, 
+Dessa forma o sistema está dividido em três partes: uma interface gráfica, \emph{frontend}, 
 em que professores e alunos possam interagir com exercícios, trilhas e turmas, uma \emph{CLI} que possibilita 
-\emph{download} e submissão de exercícios, e um servidor com uma \emph{API} que seja capaz de abstrair 
+\emph{download} e submissão de exercícios, e um servidor com uma \emph{API} capaz de abstrair 
 os recursos necessários por ambos os clientes. Na \fref{fig:arquitetura} apresenta-se um diagrama 
 da arquitetura do sistema.
 
   \begin{figure}[htpb]
     \centering
-    \includegraphics[width=0.95\linewidth]{images/arquitetura.pdf}
+    \includegraphics[width=\linewidth]{images/arquitetura.pdf}
     \caption{Diagrama que explica a arquietura do sistema \emph{Sharpener}, o qual 
     se desenvolveu uma prova de conceito.}%
     \label{fig:arquitetura}
@@ -64,7 +62,7 @@ estudou-se quais dados eram necessários para os casos de uso propostos. Este es
 \emph{MER}, modelo entidade relacional, que relacionava todas as entidades do sistema. A partir 
 do diagrama gerado, criou-se ``\emph{models}'' que representavam estas entidades. A classe 
 que possibilitou a criação destes \emph{models} provêm da \emph{ORM} que abstraí bancos 
-relacionais chamada \hyperref[link:sql_alchemy]{\emph{SQLAlchemy}}. \hyperref[link:sql_alchemy]{\emph{SQLAlchemy}}
+relacionais chamada \hyperref[link:sqlalchemy]{\emph{SQLAlchemy}}. \hyperref[link:sqlalchemy]{\emph{SQLAlchemy}}
 é uma biblioteca estável com mais de treze anos de maturidade,
 mas que continua sendo a escolha padrão dos desenvolvedores.
 
