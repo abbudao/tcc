@@ -38,7 +38,7 @@
 \coorientador{Prof.\ Dr.}{Orlando de A.\ Figueiredo}
 \curso{Engenharia da Computação}
 \area{Sistemas Computacionais} % Área de concentração do trabalho
-\data{01}{10}{2019} % Data do depósito
+\data{02}{11}{2019} % Data do depósito
 % ---
 
 
@@ -48,16 +48,26 @@
 
 % Resumo em português
 % conter no máximo 500 palavras
-\textoresumo{Propõe-se a construção de uma prova de conceito para uma ferramenta 
-    de ensino a programação, que seja moderna e de código aberto.}{Ensino de programação, Sistemas \emph{Web}}
-
+\textoresumo{
+Propõe uma ferramenta (\emph{Sharpener}) de correção automática de soluções 
+para exercícios de programação, que se diferencia por apoiar o aluno
+estagnado na resolução de um exercício com várias opções de apoio: a) dicas, 
+b) apresentação da resposta final do exercício 
+(o que obriga o aluno a responder outro exercício equivalente), ou c) com
+um roteiro de desenvolvimento incremental do exercício.
+Um protótipo parcialmente funcional foi desenvolvido como prova de conceito.
+A arquitetura do protótipo inclui: um servidor acessível a partir de 
+uma API REST, compatível com computação em nuvem, com suporte a autenticação
+federada, implementada com o \emph{framework} Flask (Python) e o SGBD Postgres; 
+e uma aplicação cliente de linha de comando, implementada em Rust.
+}{Ensino de programação, Sistemas Web}
 
 % ---
 % resumo em inglês
 % ---
 \textoresumo[english]{
-    Proposal for the creation of a proof of concept on a programming languages
-    teaching tool, that is both modern and open source.
+Proposes an automatic programming exercises correction tool  (Sharpener), which is distinct for supporting students that are stuck in an exercise resolution, with aid options such as: a) hints; b) presentation of the final answer of the exercise, then making students answer another equivalent exercise; or c)  guided and incremental approach of the exercise.
+A partially functional prototype was developed as a proof of concept. The architecture of the prototype includes a web server accessible via a REST API, compatible with Cloud Computing, that supports federated authentication and implemented using Python, with the Framework Flask, and the DBMS PostgreSQL; and a command-line interface, implemented in Rust.
 }{Programming language education, \emph{Web} systems}
 % ---
 % Configurações de aparência do PDF final
@@ -97,7 +107,7 @@
 % \input{tex/folha-aprovacao}
 
 % DEDICATÓRIA / AGRADECIMENTO / EPÍGRAFE
-% \textodedicatoria*{tex/pre-textual/dedicatoria}
+\textodedicatoria*{tex/pre-textual/dedicatoria}
 \textoagradecimentos*{tex/pre-textual/agradecimentos}
 % \textoepigrafe*{tex/pre-textual/epigrafe}
 
@@ -114,7 +124,7 @@
 % \incluilistadealgoritmos
 
 % Inclui a lista de códigos
-% \incluilistadecodigos
+\incluilistadecodigos
 
 % Inclui a lista de siglas e abreviaturas
 % \incluilistadesiglas
@@ -141,11 +151,11 @@
 \label{chapter:metodos}
 \input{tex/capitulos/metodos}
 
-\chapter{Desenvolvimento}
-\label{chapter:desenvolvimento}
-\input{tex/capitulos/desenvolvimento}
+%\chapter{Desenvolvimento}
+%\label{chapter:desenvolvimento}
+%\input{tex/capitulos/desenvolvimento}
 
-\chapter{Desenvolvimento 2.0}
+\chapter{Desenvolvimento}
 \label{chapter:desenvolvimento2}
 \input{tex/capitulos/refogados}
 
@@ -216,14 +226,16 @@
 % ---
 % Inicia os apêndices
 % ---
-% \begin{apendicesenv}
+\begin{apendicesenv}
 
-%     \chapter{Documento Básico Usando a Classe icmc}
-%     \label{chapter:documento-basico}
-%     \input{tex/appendix/documento-basico}
+     \chapter{Detalhes de implementação}
+     \label{chapter:implementacao}
+     \input{tex/appendix/implementacao}
+    \chapter{Integração e entrega contínua}
+     \label{chapter:cicd}
+     \input{tex/appendix/cicd}
 
-% \end{apendicesenv}
-% ---
+\end{apendicesenv}
 
 
 % ----------------------------------------------------------

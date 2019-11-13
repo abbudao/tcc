@@ -64,36 +64,68 @@ Um problema observado é que alguns alunos não sabem como dar um próximo passo
 na resolução de um exercício;
 muitas vezes, eles precisam de um empurrão (como uma dica) para prosseguir.
 Em aulas com muitos alunos, o professor nem sempre é capaz de proporcionar
-esse tipo de acompanhamento e atenção, devidos às limitações evidentes.
+esse tipo de acompanhamento e atenção, devido às limitações evidentes.
 A questão passa a ser, então, se uma ferramenta poderia prover ao aluno
-algum tipo de apoio, de forma que o aluno, seguindo a ferramenta, pudesse
+algum tipo de apoio, de forma que ele, seguindo a ferramenta, pudesse
 explorar possibilidades e alternativas que o impulsionassem na continuação
 do exercício; o aluno teria, com isso, uma relativa autonomia no aprendizado.
 
-A solução mais imediata é capacitar a ferramenta e entregar dicas conforme
+A solução mais imediata é capacitar a ferramenta a entregar dicas conforme
 o aluno as solicita. Para isso, o professor precisaria ter alimentado o sistema
 com dicas no mesmo momento em que teria carregado o enunciado do exercício.
 Uma ideia similar é entregar ao aluno, de uma vez, a resposta completa do problema.
 Muitos alunos têm uma ansiedade por ver respostas. 
-Um aluno que passou
+A experiência de ver a resposta de um problema não resolvido pode ser um momento
+de intensa aprendizagem.
+Em vez de coibir isso, a ferramenta pode estimular, compensando com a 
+apresentação, em seguida, de um exercício equivalente e alternativo.
+Uma terceira proposta, ainda no espírito de fornecer algum tipo de dica,
+é conduzir o aluno numa solução incremental do problemas, propondo pequenos
+passos (incrementos) rumo à solução.
+Com \emph{workflows} como esses, além do efeito pretendido de dar alguma 
+autonomia ao aluno, há um efeito colateral que é a possibilidade de o professor
+ter acesso ao histórico de consultas do aluno, podendo fazer uma avaliação
+mais rica do seu percurso de aprendizagem.
 
-
-poucas 
-têm como foco ser uma ferramenta de auxílio didático ao professor em sala de aula e 
-praticamente nenhuma é de código aberto. Assim sendo, existe uma lacuna que pode
-ser preenchida por um sistema que tenha estes dois focos e dê liberdade ao professor 
-a implementar técnicas de ensino que o convenha.
-
+Em vez de adaptar ferramentas existentes cujo código fosse aberto,
+optou-se por criar um protótipo de uma ferramenta nova como prova de conceito.
+O foco desse desenvolvimento passou a ser as componentes arquiteturais 
+principais do sistema, como o servidor e sua API de acesso, e
+uma ferramenta cliente de linha de comando.
+Embora a contribuição pretendida aqui resida no domínio do
+ensino de programação e suas ferramentas de apoio,
+levando em conta que se trata de um Trabalho de Conclusão de Curso,
+é inevitável tentar apresentar neste documento
+alguns aspectos predominantes no desenvolvimento do protótipo, 
+tais como: \emph{design} de APIs Web, estilo arquitetural \emph{REST}, computação em nuvem, autenticação federada,
+e as principais decisões de projeto.
+O escopo proposto inicialmente revelou-se excessivo, considerando-se o prazo de
+um semestre letivo, e este trabalho passou a ser apenas a etapa inicial do
+desenvolvimento do \emph{Sharpener}.
 
 \section{Objetivos}
-Pretende-se neste trabalho desenvolver uma prova de conceito de um sistema para apoio 
-ao ensino de programação em salas de aula, que seja de código aberto e que forneça 
-ferramentas necessárias para o professor conduzir e monitorar exercícios práticos dados 
-em sala de aula.
+Pretende-se neste trabalho desenvolver um protótipo, como prova de conceito, de um sistema para apoio 
+ao ensino de programação em salas de aula, que forneça apoio a estudantes estagnados no
+desenvolvimento de exercícios, apoio esse que se manifesta
+na forma de dicas, respostas, exercícios alternativos e
+passos incrementais.
+
+Em termos de software, pretende-se desenvolver minimamente uma arquitetura baseada em Web,
+com um servidor acessível por \emph{API REST}, com suporte a autenticação federada, 
+compatível com computação em nuvem, um cliente de linha de comando para funcionalidades
+diretamente ligadas aos exercícios, e um cliente web para
+funcionalidades administrativas básicas.
 
 \section{Organização}
-No Capítulo 2 pretende-se fazer uma revisão bibliográfica das técnicas, métodos e tecnologias
-empregadas na implementação 
-da prova de conceito do sistema \emph{Sharpener}. A seguir, no Capítulo 3, descreve-se a especificação 
-funcional do sistema tais como seus detalhes de implementação. Finalmente no Capítulo 4 apresentam-se 
-os resultados e possíveis trabalhos futuros.
+O cerne do trabalho é apresentado no \Cref{chapter:desenvolvimento}. Ali se encontram: a descrição
+dos \emph{workflows} do principais atores (Aluno e Professor), seja na interface de linha de comando ou
+na interface Web; e a descrição da API Web.
+
+Dado o caráter de desenvolvimento de software do presente trabalho, diversos tópicos
+foram mobilizados para a sua execução, entre metodologias, técnicas e ferramentas.
+No \Aref{chapter:implementacao}, traça-se um panorama de todo o processo.
+O \Cref{chapter:metodos} contém uma apresentação de alguns tópicos selecionados,
+assim como o \Aref{chapter:cicd}.
+
+Por fim, no \Cref{chapter:conclusao} estão as conclusões e contribuições do projeto, 
+seguidas dos trabalhos futuros.

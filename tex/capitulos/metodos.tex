@@ -1,11 +1,15 @@
+\label{chapter:metodos}
 \section{Considerações Iniciais}
-Este capítulo tem como propósito fornecer o embasamento teórico necessário 
-para o entendimento da construção do sistema proposto. Aqui é contido uma
-descrição detalhada das técnicas, métodos e tecnologias utilizadas, assim  
-preparando o leitor para o conteúdo dos próximos capítulos.
+O desenvolvimento de uma aplicação Web com suporte a computação em nuvem
+requer a articulação de muitas tecnologias, ferramentas, metodologias.
+Neste capítulo, alguns temas são repassados e discutidos, como 
+o \emph{design} de APIs Web, que é central no trabalho.
+Além disso, o \emph{framework Flask}, a linguagem \emph{Rust} e 
+a autenticação federada são temas relativamente recentes, e, assim,
+vêm em seguida.
 
 
-\section{Design de \emph{API}s}
+\section{Design de \emph{API}s \emph{Web}}
 Separação de conceitos, traduzido do termo \emph{Separation of Concerns}, é uma temática 
 chave na arquitetura cliente-servidor da internet. Parte do porquê a internet funciona tão bem
 foi a preocupação, desde sua concepção, de uma interface uniforme que, desde que respeitada, 
@@ -122,7 +126,7 @@ não se encaixam nos métodos padrões \emph{CRUD} (\emph{create, retrieve, upda
   Python é uma linguagem com sintaxe clara e concisa, favorecendo a legibilidade do 
   código-fonte, o que a torna uma linguagem extremamente produtiva. A linguagem incluí 
   diversas estruturas e módulos de alto nível e, por ser,
-  segundo \hyperref[link:exercism]{\emph{a pesquisa anual de desenvolvedores 
+  segundo \hyperref[link:so_survey]{\emph{a pesquisa anual de desenvolvedores 
       do site \emph{StackOverflow}}},
   uma das linguagens mais populares e amadas do mundo, possuí uma infinidade 
   de excelentes \emph{Frameworks} e bibliotecas de terceiros, que podem ser instalados 
@@ -164,6 +168,42 @@ não se encaixam nos métodos padrões \emph{CRUD} (\emph{create, retrieve, upda
   necessários. A abordagem minimalista possibilita o surgimento de um ecossitema de 
   pacotes diverso, em que o desenvolvedor opta por pacotes que são mais adequados a 
   necessidade do projeto, ao invés de seguir decisões tomadas pelo \emph{framework}.
+\section{Rust}
+\emph{Rust} é uma linguagem de programação que tem como enfoque velocidade, acesso de memória 
+seguro e paralelismo, sem que haja o sacrifício na expressividade de sua sintaxe. A linguagem 
+é mantida e ativamente desenvolvida pela organização \emph{Mozilla}, criadora do famoso navegador 
+\emph{Firefox}. 
+
+A linguagem é compilada, fortemente tipada  e multiplataforma. Seus binários são autocontidos e não  precisam de um ambiente de \emph{runtime}. Sua velocidade é comparável ao de um programa desenvolvido em \emph{C++}.  \emph{Rust} também conta com um excelente 
+gerenciador de dependências, chamado \emph{Cargo}. 
+
+Parte do poder de \emph{Rust} vem de abstrações transpostas de linguagens puramente funcionais, como 
+\emph{Haskell}. Recursos como \emph{macros}, \emph{pattern matching}, \emph{generics} e composição a partir 
+de \emph{traits} são parte do porquê a linguagem é considerada tão moderna e tão amada entre seus usuários.
+
+Outro aspecto chave da linguagem é o sistema de \emph{borrow checking}. O sistema delega ao compilador a gerência de memória sem a necessidade de um \emph{garbage collector}, o que confere maior desempenho em
+tempo de execução ao código gerado. Isto é alcançado seguindo várias regras impostas pelo compilador.
+Não apenas o gerenciamento de memória se beneficia desse mecanismo,
+como também a programação concorrente.
+Some-se a isso o incentivo que a linguagem dá à imutabilidade de dados,
+e temos uma das melhores tecnologias para programação de alto desempenho \cite{klabnik2018rust}.  
+
+\emph{Rust} é uma linguagem de sistema. Ela foi pensada para concorrer
+com linguagens como \emph{C++} e \emph{C}, mas evitando muitas dificuldades
+inerentes a esse nicho.
+
+O gerenciador de pacotes e de \emph{build} \emph{Cargo}, juntamente com o
+repositório de pacotes \emph{Crates} são destaque. 
+A linguagem tem sido projetada pensando em ergonomia (do ponto de vista
+do programador) em diversos aspectos, inclusive ferramentas.
+A comunidade que a \emph{Mozilla} fomentou em torno da linguagem tem servido
+de modelo no desenvolvimento de software livre.
+Adotando processos inclusivos e transparentes, a adesão à comunidade
+tem sido considerável.
+
+Muitas aplicações conhecidas são feitas em \emph{Rust}, como o
+\texttt{ripgrep} (o mais rápido \emph{engine} para expressões regulares),
+o próprio compilador \emph{Rust}, partes do \emph{Firefox}, e muito mais.
 
   \section{O padrão \emph{OAuth}}
   Apesar de vivermos em um mundo que depende, cada vez mais, de serviços digitais,
@@ -258,40 +298,3 @@ não se encaixam nos métodos padrões \emph{CRUD} (\emph{create, retrieve, upda
     \label{fig:web_flow}
   \end{figure}
   
-
-  \section{Integração e entrega contínua}
-  Um dos grandes desafios no desenvolvimento de \emph{software} é criar um processo repetível e 
-  confiável para entregas de aplicações. Frequentemente, lançamentos de \emph{software} são
-  tratados por seus desenvolvedores como momentos estressantes. Associa-se este \emph{stress} a
-  muitos processos manuais, infrequentes e propensos a erros, conduzidos em curtos prazos 
-  de tempo.
-  
-  Pode-se, no entanto, se um processo rigoroso for seguido,  
-  tornar esta tarefa fácil, tão fácil quanto o apertar de um botão.
-  Para atingirmos este nível de maturidade no desenvolvimento de 
-  \emph{software}, \citeonline{humble2010continuous} propõem que
-  devemos seguir à risca dois princípios: automatização de todas etapas que sejam 
-  automatizáveis e manter todos os artefatos necessários para um lançamento em um sistema de 
-  controle de versões. 
-
-  Idealmente, uma entrega de \emph{software} é composta por três atividades: 
-  provisionar e gerenciar o ambiente em que a aplicação irá rodar (configuração de \emph{hardware},
-  \emph{software}, infraestrutura e serviços externos), instalar a versão correta da aplicação 
-  neste ambiente e configurar a aplicação, incluindo qualquer estado ou dado que ela possa requerer.
-
-  De fato, até recentemente, vários destes passos para a entrega de \emph{software} pareciam 
-  impossíveis ou ao menos complexas de aderirem os princípios citados por 
-  \citeonline{humble2010continuous}. Como poderíamos, por exemplo, 
-  versionar \emph{hardware}? Com o advento de virtualização eficiente e barata, até esta 
-  tarefa que, \emph{a priori}, parecia impossível, virou algo corriqueiro e ubíquo. 
-  Com advento e adoção da computação em nuvem, todos os passos necessários para automatização 
-  de testes, compilação ou de artefatos e lançamento do \emph{software} estão 
-  acessíveis a qualquer desenvolvedor.
-
-  Define-se integração contínua como o processo no desenvolvimento de \emph{software} em que 
-  membros de um time integram seu trabalho de forma frequente. Cada integração desencadeia etapas 
-  como verificação de estilo de código, testes automatizados e construções de compilados ou 
-  outros artefatos, com o objetivo de encontrar problemas nas integrações o mais rápido possível.
-  Já entrega contínua leva a prática de integração contínua para outro patamar e automatiza 
-  o lançamento de versões do \emph{software} dado que as etapas anteriores foram concluídas com 
-  sucesso e o código foi revisado \cite{fowler2006continuous}.
